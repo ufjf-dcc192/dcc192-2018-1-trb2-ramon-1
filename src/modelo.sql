@@ -3,12 +3,14 @@ CREATE TABLE evento (
     titulo VARCHAR(1000) NOT NULL,
     minimoValor DOUBLE NOT NULL,
     dataInscricao TIMESTAMP NOT NULL,
-    sorteio TIMESTAMP NOT NULL
-)
+    sorteio TIMESTAMP
+);
 
 CREATE TABLE participante (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    idEvento INTEGER FOREIGN KEY REFERENCES evento(id),
+    idAmigo INTEGER FOREIGN KEY REFERENCES participante(id),
     nome VARCHAR(1000) NOT NULL,
     email VARCHAR(1000) NOT NULL,
     senha VARCHAR(10)
-)
+);
