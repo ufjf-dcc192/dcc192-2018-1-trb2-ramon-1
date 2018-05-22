@@ -1,3 +1,7 @@
+DROP TABLE participante;
+
+DROP TABLE evento;
+
 CREATE TABLE evento (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     titulo VARCHAR(1000) NOT NULL,
@@ -8,9 +12,15 @@ CREATE TABLE evento (
 
 CREATE TABLE participante (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    idEvento INTEGER FOREIGN KEY REFERENCES evento(id),
-    idAmigo INTEGER FOREIGN KEY REFERENCES participante(id),
-    nome VARCHAR(1000) NOT NULL,
-    email VARCHAR(1000) NOT NULL,
-    senha VARCHAR(10)
+    idEvento INTEGER,
+    idAmigo INTEGER,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    senha VARCHAR(30),
+    FOREIGN KEY (idEvento) REFERENCES evento(id),
+    FOREIGN KEY (idAmigo) REFERENCES participante(id)
 );
+
+INSERT INTO evento (titulo, minimoValor, dataInscricao) VALUES ('Evento 1', 100, '2018-05-23 09:00:00.000');
+
+INSERT INTO evento (titulo, minimoValor, dataInscricao) VALUES ('Evento 2', 50, '2018-05-31 09:00:00.000');

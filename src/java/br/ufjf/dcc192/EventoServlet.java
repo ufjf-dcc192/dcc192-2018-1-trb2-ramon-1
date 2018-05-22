@@ -29,6 +29,7 @@ public class EventoServlet extends HttpServlet {
         Map<String, String> rotas = new HashMap<>();
         rotas.put("/index.html", "br.ufjf.dcc192.IndexCommand");
         rotas.put("/eventos.html", "br.ufjf.dcc192.EventosListCommand");
+        rotas.put("/novoevento.html", "br.ufjf.dcc192.EventoNovoCommand");
         
         String clazzName = rotas.get(request.getServletPath());
         try {
