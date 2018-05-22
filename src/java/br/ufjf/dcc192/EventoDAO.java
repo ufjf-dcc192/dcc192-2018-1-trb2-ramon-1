@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,6 +54,16 @@ public class EventoDAO {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return eventos;
+    }
+    
+    void create(String titulo, Double minimoValor, Timestamp dataInscricao) {
+        try {
+            Statement comando = conexao.createStatement();
+            comando.executeUpdate(String.format("INSERT INTO evento(titulo, minimoValor, dataInscricao) VALUES ('%s', %f, '%1$T')", titulo, minimoValor, dataInscricao));
+            comando.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

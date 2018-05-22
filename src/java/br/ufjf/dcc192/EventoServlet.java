@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ramon Larivoir
  */
-@WebServlet(name = "EventoServlet", urlPatterns = {"/index.html", "/eventos.html", "/novoevento.html", "/inscricao.html", "/amigo.html"})
+@WebServlet(name = "EventoServlet", urlPatterns = {"/index.html", "/eventos.html", "/novoevento.html", "/inscricao.html", "/amigo.html", "/inscritos.html"})
 public class EventoServlet extends HttpServlet {
 
     @Override
@@ -45,6 +45,16 @@ public class EventoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String> rotas = new HashMap<>();
+        rotas.put("/novoevento.html", "br.ufjf.dcc192.EventoNovoPostCommand");
+        
+        String clazzName = rotas.get(request.getServletPath());
+        try {
+            Comando comando = (Comando) Class.forName(clazzName).newInstance();
+            comando.exec(request, response);
+        } catch (ClassNotFoundException|IllegalAccessException|InstantiationException ex) {
+            response.sendError(500, "Erro: " + ex);
+            Logger.getLogger(EventoServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
