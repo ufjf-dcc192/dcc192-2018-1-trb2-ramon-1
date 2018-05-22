@@ -1,10 +1,12 @@
 # 2ªTrabalho Laboratório de Programação de Sistemas Web
 
-ALUNOS:  <br>
-Ramon  <br>
-Matrícula:  <br> 
-Email:  <br>  
+## ALUNOS:
+Ramon Vaz de Mello Larivoir
+Matrícula: 201776018
+Email: rlarivoir@ice.ufjf.br
 
-Douglas Baumgratz de Carvalho <br> 
-Matrícula: 201276007  <br> 
+---
+
+Douglas Baumgratz de Carvalho 
+Matrícula: 201276007   
 Email: douglas.baumgratz@gmail.com  
