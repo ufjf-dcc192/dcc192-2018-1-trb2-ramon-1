@@ -15,11 +15,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Ramon Larivoir
  */
-public class EventoInfoCommand implements Comando{
+public class EventoNovoParticipanteCommand implements Comando{
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/eventos/infoevento.jsp");
+        RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/eventos/inscricao.jsp");
+        Integer idEvento = Integer.parseInt(request.getParameter("idEvento"));
+        request.setAttribute("idEvento", idEvento);
+        request.setAttribute("titulo", "Novo Participante");
+        dispacher.forward(request, response);
     }
     
 }

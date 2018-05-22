@@ -9,6 +9,9 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Título</th>
+                <th scope="col">Valor Mínimo</th>
+                <th scope="col">Data Inscrição</th>
+                <th scope="col">Data Sorteio</th>
                 <th scope="col" colspan="2"></th>
             </tr>
         </thead>
@@ -17,10 +20,13 @@
             <tr>
                 <th scope="row">${evento.id}</th>
                 <td>${evento.titulo}</td>
+                <td>${evento.minimo}</td>
+                <td>${evento.data}</td>
+                <td>${evento.sorteio}</td>
                 <td>
-                    <form method="POST">
-                        <input type="hidden" value="${evento.id}">
-                        <input type="button" class="btn btn-info" value="Informação sobre o evento">
+                    <form method="GET" action="inscricao.html">
+                        <input type="hidden" value="${evento.id}" name="idEvento">
+                        <input type="submit" class="btn btn-info" value="Inscrever Participante">
                     </form>
                 </td>
                 <td>

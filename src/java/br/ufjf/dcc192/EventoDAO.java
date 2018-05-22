@@ -41,11 +41,14 @@ public class EventoDAO {
         List<Evento> eventos = new ArrayList<>();
         try {
             Statement comando = conexao.createStatement();
-            ResultSet resultado = comando.executeQuery("SELECT id, titulo FROM evento");
+            ResultSet resultado = comando.executeQuery("SELECT * FROM evento");
             while(resultado.next()) {
                 Evento evento = new Evento();
                 evento.setId(resultado.getLong("id"));
                 evento.setTitulo(resultado.getString("titulo"));
+                evento.setData(resultado.getTimestamp("dataInscricao"));
+                evento.setMinimo(resultado.getDouble("minimoValor"));
+                evento.setSorteio(resultado.getTimestamp("sorteio"));
                 eventos.add(evento);
             }
             resultado.close();
