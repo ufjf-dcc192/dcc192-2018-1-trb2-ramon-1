@@ -31,6 +31,7 @@ public class EventoServlet extends HttpServlet {
         rotas.put("/eventos.html", "br.ufjf.dcc192.EventosListCommand");
         rotas.put("/novoevento.html", "br.ufjf.dcc192.EventoNovoCommand");
         rotas.put("/inscricao.html", "br.ufjf.dcc192.EventoNovoParticipanteCommand");
+        rotas.put("/inscritos.html", "br.ufjf.dcc192.EventoListInscritosCommand");
         
         String clazzName = rotas.get(request.getServletPath());
         try {
@@ -47,6 +48,7 @@ public class EventoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String> rotas = new HashMap<>();
         rotas.put("/novoevento.html", "br.ufjf.dcc192.EventoNovoPostCommand");
+        rotas.put("/inscricao.html", "br.ufjf.dcc192.EventoNovoParticipantePostCommand");
         
         String clazzName = rotas.get(request.getServletPath());
         try {

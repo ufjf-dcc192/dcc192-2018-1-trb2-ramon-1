@@ -30,14 +30,14 @@
                     </form>
                 </td>
                 <td>
-                    <form method="POST">
-                        <input type="hidden" value="${evento.id}">
-                        <input type="button" class="btn btn-secondary" value="Visualizar Inscritos">
+                    <form method="GET" action="inscritos.html">
+                        <input type="hidden" value="${evento.id}" name="idEvento">
+                        <input type="submit" class="btn btn-secondary" value="Visualizar Inscritos">
                     </form>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
-    </table
+    </table>
 </div>
 <%@include file="../jspf/footer.jspf" %>

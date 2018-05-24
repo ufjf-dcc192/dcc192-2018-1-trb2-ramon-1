@@ -1,6 +1,7 @@
 package br.ufjf.dcc192;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -10,8 +11,8 @@ public class Evento {
     long id;
     String titulo;
     double minimo;
-    Timestamp data;
-    Timestamp sorteio;
+    Date data;
+    Date sorteio;
 
     public Evento() {
     }
@@ -40,19 +41,19 @@ public class Evento {
         this.minimo = minimo;
     }
 
-    public Timestamp getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Timestamp data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
-    public Timestamp getSorteio() {
+    public Date getSorteio() {
         return sorteio;
     }
 
-    public void setSorteio(Timestamp sorteio) {
+    public void setSorteio(Date sorteio) {
         this.sorteio = sorteio;
     }
     

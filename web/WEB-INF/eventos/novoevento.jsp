@@ -12,7 +12,7 @@
             </div> 
             <div class="form-group col-md-6">
                 <label for="dataInscricao">Data de Inscrição</label>
-                <input type="text" class="form-control" id="dataInscricao" name="dataInscricao" placeHolder="YYYY-MM-DD HH:MM:SS" required>
+                <input type="text" class="form-control" id="dataInscricao" name="dataInscricao" placeHolder="YYYY-MM-DD" required>
             </div>
         </div>
         <button type="submit" class="btn btn-success">Cadastrar</button>

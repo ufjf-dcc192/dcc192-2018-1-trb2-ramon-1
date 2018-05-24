@@ -24,18 +24,11 @@ public class EventoNovoPostCommand implements Comando{
 
     @Override
     public void exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String titulo = request.getParameter("titulo");
-            Double minimoValor = Double.parseDouble(request.getParameter("minimoValor"));
-            String dataInsc = request.getParameter("dataInscricao");
-            SimpleDateFormat spf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            Date data = spf.parse(dataInsc);
-            Timestamp dataInscricao = new Timestamp(data.getTime());
-            EventoDAO.getInstance().create(titulo, minimoValor, dataInscricao);
-            response.sendRedirect("eventos.html");
-        } catch (ParseException ex) {
-            Logger.getLogger(EventoNovoPostCommand.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String titulo = request.getParameter("titulo");
+        Double minimoValor = Double.parseDouble(request.getParameter("minimoValor"));
+        String dataInscricao = request.getParameter("dataInscricao");
+        EventoDAO.getInstance().create(titulo, minimoValor, dataInscricao);
+        response.sendRedirect("eventos.html");
     }
     
 }

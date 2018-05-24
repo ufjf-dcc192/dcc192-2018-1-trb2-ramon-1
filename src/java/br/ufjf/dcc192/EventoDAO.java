@@ -46,9 +46,9 @@ public class EventoDAO {
                 Evento evento = new Evento();
                 evento.setId(resultado.getLong("id"));
                 evento.setTitulo(resultado.getString("titulo"));
-                evento.setData(resultado.getTimestamp("dataInscricao"));
+                evento.setData(resultado.getDate("dataInscricao"));
                 evento.setMinimo(resultado.getDouble("minimoValor"));
-                evento.setSorteio(resultado.getTimestamp("sorteio"));
+                evento.setSorteio(resultado.getDate("sorteio"));
                 eventos.add(evento);
             }
             resultado.close();
@@ -59,14 +59,48 @@ public class EventoDAO {
         return eventos;
     }
     
-    void create(String titulo, Double minimoValor, Timestamp dataInscricao) {
+    void create(String titulo, Double minimoValor, String dataInscricao) {
         try {
             Statement comando = conexao.createStatement();
-            comando.executeUpdate(String.format("INSERT INTO evento(titulo, minimoValor, dataInscricao) VALUES ('%s', %f, '%1$T')", titulo, minimoValor, dataInscricao));
+            comando.executeUpdate("INSERT INTO evento(titulo, minimoValor, dataInscricao) VALUES ('"+ titulo +"', "+ minimoValor+", '"+ dataInscricao +"')");
             comando.close();
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    void novoParticipante(Long idEvento, String nome, String email) {
+        try {
+            Statement comando = conexao.createStatement();
+            comando.executeUpdate("INSERT INTO participante(idEvento, nome, email) VALUES ("+ idEvento +", '"+ nome +"', '"+ email +"')");
+            comando.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Participante> listAllParticipantes(Long idEvento) {
+        List<Participante> participantes = new ArrayList<>();
+        try {
+            Statement comando = conexao.createStatement();
+            ResultSet resultado = comando.executeQuery("SELECT * FROM participante WHERE idEvento = "+ idEvento +"");
+            while(resultado.next()) {
+                Participante participante = new Participante();
+                participante.setId(resultado.getLong("id"));
+                participante.setNome(resultado.getString("nome"));
+                participante.setEmail(resultado.getString("email"));
+                participante.setSenha(resultado.getString("senha"));
+                participante.setIdAmigo(resultado.getLong("idAmigo"));
+                participante.setIdEvento(resultado.getLong("idEvento"));
+                participante.setSorteado(resultado.getBoolean("sorteado"));
+                participantes.add(participante);
+            }
+            resultado.close();
+            comando.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return participantes;
     }
     
 }
