@@ -19,7 +19,7 @@
                 <th scope="row">${participante.id}</th>
                 <td>${participante.nome}</td>
                 <td>${participante.email}</td>
-                <td>${(participante.sorteado)?"Veja seu amigo oculto":"?"}</td>
+                <td><a href="${link}">${status}</a></td>
             </tr>
         </c:forEach>
         </tbody>

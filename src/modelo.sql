@@ -7,7 +7,7 @@ CREATE TABLE evento (
     titulo VARCHAR(1000) NOT NULL,
     minimoValor DOUBLE NOT NULL,
     dataInscricao DATE NOT NULL,
-    sorteio DATE
+    dataSorteio DATE NOT NULL
 );
 
 CREATE TABLE participante (
@@ -17,11 +17,25 @@ CREATE TABLE participante (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(50) NOT NULL,
     senha VARCHAR(30),
-    sorteado BOOLEAN DEFAULT false,
     FOREIGN KEY (idEvento) REFERENCES evento(id),
     FOREIGN KEY (idAmigo) REFERENCES participante(id)
 );
 
-INSERT INTO evento (titulo, minimoValor, dataInscricao) VALUES ('Evento 1', 100, '2018-05-23 09:00:00.000');
+INSERT INTO evento (titulo, minimoValor, dataInscricao, dataSorteio) VALUES ('Evento 1', 100, '2018-05-23 09:00:00.000', '2018-05-29 09:00:00');
 
-INSERT INTO evento (titulo, minimoValor, dataInscricao) VALUES ('Evento 2', 50, '2018-06-25 09:00:00.000');
+INSERT INTO evento (titulo, minimoValor, dataInscricao, dataSorteio) VALUES ('Evento 2', 50, '2018-06-25 09:00:00.000', '2018-06-27 09:00:00');
+
+INSERT INTO participante (idEvento, nome, email) VALUES (1, 'João', 'joao@gmail.com');
+
+INSERT INTO participante (idEvento, nome, email) VALUES (1, 'José', 'jose@gmail.com');
+
+INSERT INTO participante (idEvento, nome, email) VALUES (1, 'Maria', 'maria@gmail.com');
+
+INSERT INTO participante (idEvento, nome, email) VALUES (1, 'Ana', 'ana@gmail.com');
+
+INSERT INTO participante (idEvento, nome, email) VALUES (1, 'Antônio', 'antonio@gmail.com');
+
+INSERT INTO participante (idEvento, nome, email) VALUES (2, 'Matheus', 'matheus@gmail.com');
+
+INSERT INTO participante (idEvento, nome, email) VALUES (2, 'Nathalia', 'nathalia@gmail.com');
+

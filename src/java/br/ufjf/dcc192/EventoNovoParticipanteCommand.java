@@ -34,6 +34,8 @@ public class EventoNovoParticipanteCommand implements Comando {
         } else {
             dispacher = request.getRequestDispatcher("/WEB-INF/erros/erro.jsp");
             request.setAttribute("titulo", "Inscrições encerradas!");
+            String link = "eventos.html";
+            request.setAttribute("link", link);
         }
         dispacher.forward(request, response);
     }

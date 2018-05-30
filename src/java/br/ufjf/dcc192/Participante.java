@@ -5,8 +5,6 @@ package br.ufjf.dcc192;
  * @author Ramon Larivoir
  */
 public class Participante {
-    private static boolean SORTEADO = true;
-    private static boolean NAOSORTEADO = false;
     
     Long id;
     Long idEvento;
@@ -14,10 +12,8 @@ public class Participante {
     String nome;
     String email;
     String senha;
-    boolean sorteado;
 
     public Participante() {
-        sorteado = Participante.NAOSORTEADO;
     }
 
     public long getId() {
@@ -66,14 +62,5 @@ public class Participante {
 
     public void setIdAmigo(Long idAmigo) {
         this.idAmigo = idAmigo;
-        this.sorteado = Participante.SORTEADO;
-    }
-
-    public boolean isSorteado() {
-        return sorteado;
-    }
-
-    public void setSorteado(boolean sorteado) {
-        this.sorteado = sorteado;
     }
 }

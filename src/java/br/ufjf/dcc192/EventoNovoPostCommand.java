@@ -27,7 +27,8 @@ public class EventoNovoPostCommand implements Comando{
         String titulo = request.getParameter("titulo");
         Double minimoValor = Double.parseDouble(request.getParameter("minimoValor"));
         String dataInscricao = request.getParameter("dataInscricao");
-        EventoDAO.getInstance().create(titulo, minimoValor, dataInscricao);
+        String dataSorteio = request.getParameter("dataSorteio");
+        EventoDAO.getInstance().create(titulo, minimoValor, dataInscricao, dataSorteio);
         response.sendRedirect("eventos.html");
     }
     

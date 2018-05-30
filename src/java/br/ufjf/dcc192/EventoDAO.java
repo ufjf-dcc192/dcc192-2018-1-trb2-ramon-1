@@ -48,7 +48,7 @@ public class EventoDAO {
                 evento.setTitulo(resultado.getString("titulo"));
                 evento.setData(resultado.getDate("dataInscricao"));
                 evento.setMinimo(resultado.getDouble("minimoValor"));
-                evento.setSorteio(resultado.getDate("sorteio"));
+                evento.setSorteio(resultado.getDate("dataSorteio"));
                 eventos.add(evento);
             }
             resultado.close();
@@ -59,10 +59,10 @@ public class EventoDAO {
         return eventos;
     }
     
-    void create(String titulo, Double minimoValor, String dataInscricao) {
+    void create(String titulo, Double minimoValor, String dataInscricao, String dataSorteio) {
         try {
             Statement comando = conexao.createStatement();
-            comando.executeUpdate("INSERT INTO evento(titulo, minimoValor, dataInscricao) VALUES ('"+ titulo +"', "+ minimoValor+", '"+ dataInscricao +"')");
+            comando.executeUpdate("INSERT INTO evento(titulo, minimoValor, dataInscricao, dataSorteio) VALUES ('"+ titulo +"', "+ minimoValor+", '"+ dataInscricao +", "+ dataSorteio +"')");
             comando.close();
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,7 +92,6 @@ public class EventoDAO {
                 participante.setSenha(resultado.getString("senha"));
                 participante.setIdAmigo(resultado.getLong("idAmigo"));
                 participante.setIdEvento(resultado.getLong("idEvento"));
-                participante.setSorteado(resultado.getBoolean("sorteado"));
                 participantes.add(participante);
             }
             resultado.close();
@@ -113,7 +112,7 @@ public class EventoDAO {
                 evento.setTitulo(resultado.getString("titulo"));
                 evento.setData(resultado.getDate("dataInscricao"));
                 evento.setMinimo(resultado.getDouble("minimoValor"));
-                evento.setSorteio(resultado.getDate("sorteio"));
+                evento.setSorteio(resultado.getDate("dataSorteio"));
             }
             resultado.close();
             comando.close();
