@@ -103,4 +103,23 @@ public class EventoDAO {
         return participantes;
     }
     
+    public Evento getEvento(Long idEvento) {
+        Evento evento = new Evento();
+        try {
+            Statement comando = conexao.createStatement();
+            ResultSet resultado = comando.executeQuery("SELECT * FROM evento WHERE id = "+ idEvento +"");
+            while(resultado.next()) {
+                evento.setId(resultado.getLong("id"));
+                evento.setTitulo(resultado.getString("titulo"));
+                evento.setData(resultado.getDate("dataInscricao"));
+                evento.setMinimo(resultado.getDouble("minimoValor"));
+                evento.setSorteio(resultado.getDate("sorteio"));
+            }
+            resultado.close();
+            comando.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return evento;
+    }
 }

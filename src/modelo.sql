@@ -24,4 +24,4 @@ CREATE TABLE participante (
 
 INSERT INTO evento (titulo, minimoValor, dataInscricao) VALUES ('Evento 1', 100, '2018-05-23 09:00:00.000');
 
-INSERT INTO evento (titulo, minimoValor, dataInscricao) VALUES ('Evento 2', 50, '2018-05-31 09:00:00.000');
+INSERT INTO evento (titulo, minimoValor, dataInscricao) VALUES ('Evento 2', 50, '2018-06-25 09:00:00.000');
