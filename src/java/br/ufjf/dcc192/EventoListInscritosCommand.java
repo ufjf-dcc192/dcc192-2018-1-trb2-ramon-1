@@ -19,7 +19,7 @@ public class EventoListInscritosCommand implements Comando {
         Date hoje = new Date();
         String link;
         String status;
-        if(evento.getSorteio().after(hoje)) {
+        if(evento.getData().after(hoje)) {
             link = "#";
             status = "?";
         } else {

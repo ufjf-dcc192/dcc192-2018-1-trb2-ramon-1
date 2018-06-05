@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../jspf/header.jspf" %>
 <div class="container">
     <a class="btn btn-success novo-evento" href="novoevento.html">Novo Evento</a>
@@ -11,7 +12,7 @@
                 <th scope="col">Título</th>
                 <th scope="col">Valor Mínimo</th>
                 <th scope="col">Data Inscrição</th>
-                <th scope="col">Data Sorteio</th>
+                <th scope="col">Data Evento</th>
                 <th scope="col" colspan="2"></th>
             </tr>
         </thead>
@@ -21,8 +22,8 @@
                 <th scope="row">${evento.id}</th>
                 <td>${evento.titulo}</td>
                 <td>${evento.minimo}</td>
-                <td>${evento.data}</td>
-                <td>${evento.sorteio}</td>
+                <td><fmt:formatDate value="${evento.data}" pattern="dd/MM/yyyy HH:mm"/></td>
+                <td><fmt:formatDate value="${evento.sorteio}" pattern="dd/MM/yyyy HH:mm"/></td>
                 <td>
                     <form method="GET" action="inscricao.html">
                         <input type="hidden" value="${evento.id}" name="idEvento">

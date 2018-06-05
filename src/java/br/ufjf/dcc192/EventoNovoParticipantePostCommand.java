@@ -18,10 +18,11 @@ public class EventoNovoParticipantePostCommand implements Comando{
         Long idEvento = Long.parseLong(request.getParameter("idEvento"));
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
         Evento evento = EventoDAO.getInstance().getEvento(idEvento);
         Date hoje = new Date();
         if(evento.getData().after(hoje)) {
-            EventoDAO.getInstance().novoParticipante(idEvento, nome, email);
+            EventoDAO.getInstance().novoParticipante(idEvento, nome, email, senha);
             response.sendRedirect("eventos.html");
         } else {
             request.setAttribute("titulo", "Inscrições encerradas!");

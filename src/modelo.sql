@@ -6,8 +6,8 @@ CREATE TABLE evento (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     titulo VARCHAR(1000) NOT NULL,
     minimoValor DOUBLE NOT NULL,
-    dataInscricao DATE NOT NULL,
-    dataSorteio DATE NOT NULL
+    dataInscricao TIMESTAMP NOT NULL,
+    dataSorteio TIMESTAMP NOT NULL
 );
 
 CREATE TABLE participante (
@@ -25,17 +25,17 @@ INSERT INTO evento (titulo, minimoValor, dataInscricao, dataSorteio) VALUES ('Ev
 
 INSERT INTO evento (titulo, minimoValor, dataInscricao, dataSorteio) VALUES ('Evento 2', 50, '2018-06-25 09:00:00.000', '2018-06-27 09:00:00');
 
-INSERT INTO participante (idEvento, nome, email) VALUES (1, 'João', 'joao@gmail.com');
+INSERT INTO participante (idEvento, nome, email, senha) VALUES (1, 'João', 'joao@gmail.com', '123');
 
-INSERT INTO participante (idEvento, nome, email) VALUES (1, 'José', 'jose@gmail.com');
+INSERT INTO participante (idEvento, nome, email, senha) VALUES (1, 'José', 'jose@gmail.com', '123');
 
-INSERT INTO participante (idEvento, nome, email) VALUES (1, 'Maria', 'maria@gmail.com');
+INSERT INTO participante (idEvento, nome, email, senha) VALUES (1, 'Maria', 'maria@gmail.com', '123');
 
-INSERT INTO participante (idEvento, nome, email) VALUES (1, 'Ana', 'ana@gmail.com');
+INSERT INTO participante (idEvento, nome, email, senha) VALUES (1, 'Ana', 'ana@gmail.com', '123');
 
-INSERT INTO participante (idEvento, nome, email) VALUES (1, 'Antônio', 'antonio@gmail.com');
+INSERT INTO participante (idEvento, nome, email, senha) VALUES (1, 'Antônio', 'antonio@gmail.com', '123');
 
-INSERT INTO participante (idEvento, nome, email) VALUES (2, 'Matheus', 'matheus@gmail.com');
+INSERT INTO participante (idEvento, nome, email, senha) VALUES (2, 'Matheus', 'matheus@gmail.com', '123');
 
-INSERT INTO participante (idEvento, nome, email) VALUES (2, 'Nathalia', 'nathalia@gmail.com');
+INSERT INTO participante (idEvento, nome, email, senha) VALUES (2, 'Nathalia', 'nathalia@gmail.com', '123');
 

@@ -14,11 +14,11 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="dataInscricao">Data de Inscrição</label>
-                <input type="text" class="form-control" id="dataInscricao" name="dataInscricao" placeHolder="YYYY-MM-DD" required>
+                <input type="datetime-local" class="form-control" id="dataInscricao" name="dataInscricao" placeHolder="dd-mm-aaaa --:--" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="dataInscricao">Data do Sorteio</label>
-                <input type="text" class="form-control" id="dataInscricao" name="dataSorteio" placeHolder="YYYY-MM-DD" required>
+                <label for="dataInscricao">Data do Evento</label>
+                <input type="datetime-local" class="form-control" id="dataInscricao" name="dataSorteio" placeHolder="dd-mm-aaaa --:--" required>
             </div>
         </div>
         <button type="submit" class="btn btn-success">Cadastrar</button>

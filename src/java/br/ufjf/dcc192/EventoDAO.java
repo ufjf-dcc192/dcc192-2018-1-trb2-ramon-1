@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +18,7 @@ import java.util.logging.Logger;
  * @author Ramon Larivoir
  */
 public class EventoDAO {
+    public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
     
     private static Connection conexao;
     private static EventoDAO instancia;
@@ -46,9 +49,9 @@ public class EventoDAO {
                 Evento evento = new Evento();
                 evento.setId(resultado.getLong("id"));
                 evento.setTitulo(resultado.getString("titulo"));
-                evento.setData(resultado.getDate("dataInscricao"));
+                evento.setData(resultado.getTimestamp("dataInscricao"));
                 evento.setMinimo(resultado.getDouble("minimoValor"));
-                evento.setSorteio(resultado.getDate("dataSorteio"));
+                evento.setSorteio(resultado.getTimestamp("dataSorteio"));
                 eventos.add(evento);
             }
             resultado.close();
@@ -59,20 +62,20 @@ public class EventoDAO {
         return eventos;
     }
     
-    void create(String titulo, Double minimoValor, String dataInscricao, String dataSorteio) {
+    void create(String titulo, Double minimoValor, Timestamp dataInscricao, Timestamp dataSorteio) {
         try {
             Statement comando = conexao.createStatement();
-            comando.executeUpdate("INSERT INTO evento(titulo, minimoValor, dataInscricao, dataSorteio) VALUES ('"+ titulo +"', "+ minimoValor+", '"+ dataInscricao +", "+ dataSorteio +"')");
+            comando.executeUpdate("INSERT INTO evento(titulo, minimoValor, dataInscricao, dataSorteio) VALUES ('"+ titulo +"', "+ minimoValor+", '"+ dataInscricao +"', '"+ dataSorteio +"')");
             comando.close();
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    void novoParticipante(Long idEvento, String nome, String email) {
+    void novoParticipante(Long idEvento, String nome, String email, String senha) {
         try {
             Statement comando = conexao.createStatement();
-            comando.executeUpdate("INSERT INTO participante(idEvento, nome, email) VALUES ("+ idEvento +", '"+ nome +"', '"+ email +"')");
+            comando.executeUpdate("INSERT INTO participante(idEvento, nome, email, senha) VALUES ("+ idEvento +", '"+ nome +"', '"+ email +"', '"+ senha +"')");
             comando.close();
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
