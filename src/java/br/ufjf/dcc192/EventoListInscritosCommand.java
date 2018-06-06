@@ -16,6 +16,7 @@ public class EventoListInscritosCommand implements Comando {
         Long idEvento = Long.parseLong(request.getParameter("idEvento"));
         List<Participante> participantes = EventoDAO.getInstance().listAllParticipantes(idEvento);
         Evento evento = EventoDAO.getInstance().getEvento(idEvento);
+        evento.sorteia();       //sorteia participantes
         Date hoje = new Date();
         String link;
         String status;
