@@ -1,6 +1,7 @@
 package br.ufjf.dcc192;
 
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -59,27 +60,12 @@ public class Evento {
         this.sorteio = sorteio;
     }
 
-    
-    /*
-        Função sorteia retorna um sorteado por chamada de função, por isso contador foi 
-        criado fora da função e incrementado a cada vez que for feito um sorteio;    
-    */    
-    int contadorSorteio = 0; // contador começa com 0
 
-    public Participante sorteia(List<Participante> listaParticipantes, Participante participante) {
-        int totalParticipantes = listaParticipantes.size(); //total de participantes      
+    public void sorteia() {
         
-        for (int i = 0; i < listaParticipantes.size(); i++) {
-            if (contadorSorteio < totalParticipantes) {
-                if (listaParticipantes.get(i) != participante && listaParticipantes.get(i) != null) {
-                    Participante sorteado = listaParticipantes.get(i);  //guarda sorteado
-                    listaParticipantes.remove(listaParticipantes.get(i)); //remove sorteado da lista
-                    listaParticipantes.remove(participante);
-                    contadorSorteio++;
-                    return sorteado;
-                }
-            }
-        }
-        return null;
+       List<Participante> participantes = EventoDAO.getInstance().listAllParticipantes(this.id); //guarda lista de participantes do evento id em participantes
+       Collections.shuffle(participantes);  //embaralha a lista
+             
+       
     }
 }
