@@ -128,10 +128,10 @@ public class EventoDAO {
         return evento;
     }
 
-    public void atualizaAmigo(Long idAmigo, Long idEvento) {
+    public void atualizaAmigo(Long id, Long idAmigo, Long idEvento) {
         try {
             comando = conexao.createStatement();
-            comando.executeQuery("UPDATE participante SET idAmigo = " + idAmigo + " WHERE id = " + idEvento + "");            
+            comando.executeQuery("UPDATE participante SET idAmigo = " + idAmigo + " WHERE idEvento = " + idEvento + " && id = " + id + " ");
             comando.close();
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
