@@ -22,6 +22,8 @@ public class EventoDAO {
     
     private static Connection conexao;
     private static EventoDAO instancia;
+    private Statement comando;
+    private ResultSet resultado;
     
     public static EventoDAO getInstance() {
         if(instancia == null) {
@@ -43,8 +45,8 @@ public class EventoDAO {
     public List<Evento> listAll() {
         List<Evento> eventos = new ArrayList<>();
         try {
-            Statement comando = conexao.createStatement();
-            ResultSet resultado = comando.executeQuery("SELECT * FROM evento");
+            comando = conexao.createStatement();
+            resultado = comando.executeQuery("SELECT * FROM evento");
             while(resultado.next()) {
                 Evento evento = new Evento();
                 evento.setId(resultado.getLong("id"));
@@ -64,7 +66,7 @@ public class EventoDAO {
     
     void create(String titulo, Double minimoValor, Timestamp dataInscricao, Timestamp dataSorteio) {
         try {
-            Statement comando = conexao.createStatement();
+            comando = conexao.createStatement();
             comando.executeUpdate("INSERT INTO evento(titulo, minimoValor, dataInscricao, dataSorteio) VALUES ('"+ titulo +"', "+ minimoValor+", '"+ dataInscricao +"', '"+ dataSorteio +"')");
             comando.close();
         } catch (SQLException ex) {
@@ -74,7 +76,7 @@ public class EventoDAO {
     
     void novoParticipante(Long idEvento, String nome, String email, String senha) {
         try {
-            Statement comando = conexao.createStatement();
+            comando = conexao.createStatement();
             comando.executeUpdate("INSERT INTO participante(idEvento, nome, email, senha) VALUES ("+ idEvento +", '"+ nome +"', '"+ email +"', '"+ senha +"')");
             comando.close();
         } catch (SQLException ex) {
@@ -85,8 +87,8 @@ public class EventoDAO {
     public List<Participante> listAllParticipantes(Long idEvento) {
         List<Participante> participantes = new ArrayList<>();
         try {
-            Statement comando = conexao.createStatement();
-            ResultSet resultado = comando.executeQuery("SELECT * FROM participante WHERE idEvento = "+ idEvento +"");
+            comando = conexao.createStatement();
+            resultado = comando.executeQuery("SELECT * FROM participante WHERE idEvento = "+ idEvento +"");
             while(resultado.next()) {
                 Participante participante = new Participante();
                 participante.setId(resultado.getLong("id"));
@@ -108,8 +110,8 @@ public class EventoDAO {
     public Evento getEvento(Long idEvento) {
         Evento evento = new Evento();
         try {
-            Statement comando = conexao.createStatement();
-            ResultSet resultado = comando.executeQuery("SELECT * FROM evento WHERE id = "+ idEvento +"");
+            comando = conexao.createStatement();
+            resultado = comando.executeQuery("SELECT * FROM evento WHERE id = "+ idEvento +"");
             while(resultado.next()) {
                 evento.setId(resultado.getLong("id"));
                 evento.setTitulo(resultado.getString("titulo"));
