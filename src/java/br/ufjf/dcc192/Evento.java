@@ -61,6 +61,7 @@ public class Evento {
     }
 
 
+    
     public void sorteia() {
         
        List<Participante> participantes = EventoDAO.getInstance().listAllParticipantes(this.id); //guarda lista de participantes do evento id em participantes
