@@ -16,8 +16,10 @@ public class Evento {
     double minimo;
     Date data;
     Date sorteio;
+    Boolean sorteado;
 
     public Evento() {
+        sorteado = false;
     }
 
     public long getId() {
@@ -60,21 +62,20 @@ public class Evento {
         this.sorteio = sorteio;
     }
 
-
-
-    
     public void sorteia() {
-        
-       List<Participante> participantes = EventoDAO.getInstance().listAllParticipantes(this.id); //guarda lista de participantes do evento id em participantes
-       Collections.shuffle(participantes);  //embaralha a lista
-             
-        for (int i = 0; i < participantes.size(); i++) {
-            
-            Long idParticipante = participantes.get(i).id;            
-            Long idAmigoSorteado = participantes.get(i+1).id;            
-            EventoDAO.getInstance().atualizaAmigo(idParticipante, idAmigoSorteado, this.id);
-            i++;    // em conjunto com a iteração do for incrementa dois, pulando assim o amigo sorteado anteriormente
-            
+
+        if (sorteado == false) {
+            List<Participante> participantes = EventoDAO.getInstance().listAllParticipantes(this.id); //guarda lista de participantes do evento id em participantes
+            Collections.shuffle(participantes);  //embaralha a lista
+            for (int i = 0; i < participantes.size(); i++) {
+
+                Long idParticipante = participantes.get(i).id;
+                Long idAmigoSorteado = participantes.get(i + 1).id;
+                EventoDAO.getInstance().atualizaAmigo(idParticipante, idAmigoSorteado, this.id);
+                i++;    // em conjunto com a iteração do for incrementa dois, pulando assim o amigo sorteado anteriormente
+                sorteado = true;
+            }
         }
+        
     }
 }
