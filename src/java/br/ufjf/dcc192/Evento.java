@@ -66,16 +66,25 @@ public class Evento {
 
         if (sorteado == false) {
             List<Participante> participantes = EventoDAO.getInstance().listAllParticipantes(this.id); //guarda lista de participantes do evento id em participantes
-            Collections.shuffle(participantes);  //embaralha a lista
-            for (int i = 0; i < participantes.size(); i++) {
+            Collections.shuffle(participantes);  //embaralha a lista        
 
+            int primeiroParticipante = 0;
+            int ultimoParticipante = participantes.size() - 1;
+
+            for (int i = 0; i < participantes.size(); i++) {
                 Long idParticipante = participantes.get(i).id;
                 Long idAmigoSorteado = participantes.get(i + 1).id;
                 EventoDAO.getInstance().atualizaAmigo(idParticipante, idAmigoSorteado, this.id);
-                i++;    // em conjunto com a iteração do for incrementa dois, pulando assim o amigo sorteado anteriormente
+                i++;    // em conjunto com a iteração do for incrementa dois, pulando assim o amigo sorteado anteriormente                
                 sorteado = true;
+
             }
+
+            Long idParticipante = participantes.get(ultimoParticipante).id;
+            Long idAmigoSorteado = participantes.get(primeiroParticipante).id;
+            EventoDAO.getInstance().atualizaAmigo(idParticipante, idAmigoSorteado, this.id);
+
         }
-        
+
     }
 }
