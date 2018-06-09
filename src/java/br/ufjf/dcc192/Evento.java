@@ -64,7 +64,8 @@ public class Evento {
 
     public void sorteia() {
 
-        if (sorteado == false) {
+        if (this.sorteado == false) {
+            
             List<Participante> participantes = EventoDAO.getInstance().listAllParticipantes(this.id); //guarda lista de participantes do evento id em participantes
             Collections.shuffle(participantes);  //embaralha a lista        
 
@@ -76,8 +77,7 @@ public class Evento {
                 Long idAmigoSorteado = participantes.get(i + 1).id;
                 EventoDAO.getInstance().atualizaAmigo(idParticipante, idAmigoSorteado, this.id);
                 i++;    // em conjunto com a iteração do for incrementa dois, pulando assim o amigo sorteado anteriormente                
-                sorteado = true;
-
+                this.sorteado = true;
             }
 
             Long idParticipante = participantes.get(ultimoParticipante).id;
