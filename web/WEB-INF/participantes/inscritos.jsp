@@ -19,7 +19,7 @@
                 <th scope="row">${participante.id}</th>
                 <td>${participante.nome}</td>
                 <td>${participante.email}</td>
-                <td><a href="${link}">${status}</a></td>
+                <td><a href="${link}?id=${participante.id}">${status}</a></td>
             </tr>
         </c:forEach>
         </tbody>

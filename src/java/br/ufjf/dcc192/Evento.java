@@ -62,29 +62,36 @@ public class Evento {
         this.sorteio = sorteio;
     }
 
-    public void sorteia() {
+    public Boolean getSorteado() {
+        return sorteado;
+    }
 
-        if (this.sorteado == false) {
-            
+    public void setSorteado(Boolean sorteado) {
+        this.sorteado = sorteado;
+    }
+
+    public void sorteia() {
+        Date hoje = new Date();
+        if (this.sorteado == false && this.data.before(hoje)) {
             List<Participante> participantes = EventoDAO.getInstance().listAllParticipantes(this.id); //guarda lista de participantes do evento id em participantes
             Collections.shuffle(participantes);  //embaralha a lista        
 
             int primeiroParticipante = 0;
             int ultimoParticipante = participantes.size() - 1;
-
             for (int i = 0; i < participantes.size(); i++) {
-                Long idParticipante = participantes.get(i).id;
-                Long idAmigoSorteado = participantes.get(i + 1).id;
-                EventoDAO.getInstance().atualizaAmigo(idParticipante, idAmigoSorteado, this.id);
-                i++;    // em conjunto com a iteração do for incrementa dois, pulando assim o amigo sorteado anteriormente                
-                this.sorteado = true;
+                if (i != participantes.size() - 1) {
+                    Long idParticipante = participantes.get(i).getId();
+                    Long idAmigoSorteado = participantes.get(i + 1).getId();
+                    EventoDAO.getInstance().atualizaAmigo(idParticipante, idAmigoSorteado, this.id);
+                }               
             }
 
-            Long idParticipante = participantes.get(ultimoParticipante).id;
-            Long idAmigoSorteado = participantes.get(primeiroParticipante).id;
+            Long idParticipante = participantes.get(ultimoParticipante).getId();
+            Long idAmigoSorteado = participantes.get(primeiroParticipante).getId();
             EventoDAO.getInstance().atualizaAmigo(idParticipante, idAmigoSorteado, this.id);
 
+            this.sorteado = true;
+            EventoDAO.getInstance().setSorteado(this.id, this.sorteado);
         }
-
     }
 }

@@ -7,7 +7,8 @@ CREATE TABLE evento (
     titulo VARCHAR(1000) NOT NULL,
     minimoValor DOUBLE NOT NULL,
     dataInscricao TIMESTAMP NOT NULL,
-    dataSorteio TIMESTAMP NOT NULL
+    dataSorteio TIMESTAMP NOT NULL,
+    sorteado BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE participante (

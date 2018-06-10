@@ -32,16 +32,17 @@ public class EventoServlet extends HttpServlet {
         rotas.put("/novoevento.html", "br.ufjf.dcc192.EventoNovoCommand");
         rotas.put("/inscricao.html", "br.ufjf.dcc192.EventoNovoParticipanteCommand");
         rotas.put("/inscritos.html", "br.ufjf.dcc192.EventoListInscritosCommand");
-        
+        rotas.put("/amigo.html", "br.ufjf.dcc192.EventoAmigoCommand");
+
         String clazzName = rotas.get(request.getServletPath());
         try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();
             comando.exec(request, response);
-        } catch (ClassNotFoundException|IllegalAccessException|InstantiationException ex) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             response.sendError(500, "Erro: " + ex);
             Logger.getLogger(EventoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     @Override
@@ -49,12 +50,13 @@ public class EventoServlet extends HttpServlet {
         Map<String, String> rotas = new HashMap<>();
         rotas.put("/novoevento.html", "br.ufjf.dcc192.EventoNovoPostCommand");
         rotas.put("/inscricao.html", "br.ufjf.dcc192.EventoNovoParticipantePostCommand");
-        
+        rotas.put("/amigo.html", "br.ufjf.dcc192.EventoAmigoPostCommand");
+
         String clazzName = rotas.get(request.getServletPath());
         try {
             Comando comando = (Comando) Class.forName(clazzName).newInstance();
             comando.exec(request, response);
-        } catch (ClassNotFoundException|IllegalAccessException|InstantiationException ex) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             response.sendError(500, "Erro: " + ex);
             Logger.getLogger(EventoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

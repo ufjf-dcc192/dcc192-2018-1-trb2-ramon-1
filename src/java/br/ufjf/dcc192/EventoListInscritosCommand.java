@@ -24,7 +24,7 @@ public class EventoListInscritosCommand implements Comando {
             link = "#";
             status = "?";
         } else {
-            link = "#";
+            link = "amigo.html";
             status = "Veja seu amigo oculto";
         }
         request.setAttribute("link", link);

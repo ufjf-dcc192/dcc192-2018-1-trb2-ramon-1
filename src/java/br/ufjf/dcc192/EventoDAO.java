@@ -119,6 +119,7 @@ public class EventoDAO {
                 evento.setData(resultado.getDate("dataInscricao"));
                 evento.setMinimo(resultado.getDouble("minimoValor"));
                 evento.setSorteio(resultado.getDate("dataSorteio"));
+                evento.setSorteado(resultado.getBoolean("sorteado"));
             }
             resultado.close();
             comando.close();
@@ -127,15 +128,66 @@ public class EventoDAO {
         }
         return evento;
     }
-
-    public void atualizaAmigo(Long id, Long idAmigo, Long idEvento) {
+    
+    public Participante getParticipante(Long idParticipante) {
+        Participante participante = new Participante();
         try {
             comando = conexao.createStatement();
-            comando.executeQuery("UPDATE participante SET idAmigo = " + idAmigo + " WHERE idEvento = " + idEvento + " && id = " + id + " ");
+            resultado = comando.executeQuery("SELECT * FROM participante WHERE id = " + idParticipante + "");
+            while (resultado.next()) {
+                participante.setId(resultado.getLong("id"));
+                participante.setEmail(resultado.getString("email"));
+                participante.setIdAmigo(resultado.getLong("idAmigo"));
+                participante.setIdEvento(resultado.getLong("idEvento"));
+                participante.setNome(resultado.getString("nome"));
+                participante.setSenha(resultado.getString("senha"));
+            }
+            resultado.close();
             comando.close();
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return participante;
+    }
 
+    public void atualizaAmigo(Long id, Long idAmigo, Long idEvento) {
+        try {
+            comando = conexao.createStatement();
+            comando.executeUpdate("UPDATE participante SET idAmigo = " + idAmigo + " WHERE idEvento = " + idEvento + " AND id = " + id + " ");
+            comando.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setSorteado(Long idEvento, Boolean sorteado) {
+        try {
+            comando = conexao.createStatement();
+            comando.executeUpdate("UPDATE evento SET sorteado = " + sorteado + " WHERE id = " + idEvento + "");
+            comando.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Participante login(Long idParcipante, String email, String senha) {
+        Participante participante = new Participante();
+        try {
+            comando = conexao.createStatement();
+            resultado = comando.executeQuery("SELECT * FROM participante WHERE id = " + idParcipante + " AND email = '" + email + "' AND senha = '" + senha + "'");
+            while (resultado.next()) {
+                participante.setEmail(resultado.getString("email"));
+                participante.setId(resultado.getLong("id"));
+                participante.setIdAmigo(resultado.getLong("idAmigo"));
+                participante.setIdEvento(resultado.getLong("idEvento"));
+                participante.setNome(resultado.getString("nome"));
+                participante.setSenha(resultado.getString("senha"));
+            }
+            resultado.close();
+            comando.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return participante;
     }
 }
