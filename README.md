@@ -10,3 +10,7 @@ Email: rlarivoir@ice.ufjf.br
 Douglas Baumgratz de Carvalho <br>
 Matrícula: 201276007 <br>
 Email: douglas.baumgratz@gmail.com  
+
+---
+
+## Existe um modelo.sql na pasta src do projeto
